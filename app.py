@@ -32,6 +32,7 @@ api.add_resource(UserRegistration, '/register')
 def mn():
     return '<h1>Hi There !</h1>'
 
+db.init_app(app)
+
 if __name__ == '__main__':
-    db.init_app(app)
     app.run(debug=True, port=5000)
