@@ -24,6 +24,10 @@ api.add_resource(Item, '/item/<string:name>')
 api.add_resource(Items, '/items/')
 api.add_resource(UserRegistration, '/register')
 
+@app.route('/',methods=["GET"])
+def mn():
+    return '<h1>Hi There !</h1>'
+
 if __name__ == '__main__':
     db.init_app(app)
     app.run(debug=True, port=5000)
