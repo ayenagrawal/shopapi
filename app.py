@@ -6,10 +6,14 @@ from resources.user import UserRegistration
 from resources.store import Store, StoreList
 from resources.item import Item, Items
 from db import db
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 api = Api(app)
-app.secret_key = r'abcdefgh'
+app.secret_key = os.getenv('secret_key').encode('UTF-8')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 jwt = JWT(app, authenicate, identity)
