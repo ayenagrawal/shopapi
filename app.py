@@ -14,7 +14,9 @@ load_dotenv()
 app = Flask(__name__)
 api = Api(app)
 app.secret_key = os.getenv('secret_key').encode('UTF-8')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+db_URI = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+if db_URI.split()[0].startswith('postgres://'): db_URI.replace('postgres://', 'postgresql://', 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = db_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 jwt = JWT(app, authenicate, identity)
 
